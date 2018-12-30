@@ -17,6 +17,8 @@ const cardsArray = [
     'fa-bomb'
 ];
 
+let firstCard = null, secondCard = null, fcli = null, scli = null;
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -50,6 +52,14 @@ function cardClick(){
     $('.card').each(function (){
         $(this).on('click', function (){
             showSymbol(this);
+            if (fcli === null){
+                firstCard = $(this)[0].children[0].className;
+                fcli = $(this);
+            } else if (fcli !== null && scli === null){
+                secondCard = $(this)[0].children[0].className;
+                scli = $(this);
+            }
+            console.log(firstCard, secondCard);
         });
     })
 }
@@ -57,7 +67,6 @@ function cardClick(){
 cardClick();
 /*
  * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
