@@ -17,6 +17,8 @@ const cardsArray = [
     'fa-bomb'
 ];
 
+let moves = 0;
+
 let firstCard = null, secondCard = null, fcli = null, scli = null;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -32,6 +34,11 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function incrementMoves() {
+    moves += 1;
+    $('.moves').text(moves);
 }
 
 function createGrid(){
@@ -79,6 +86,7 @@ function cardClick(){
                     }
                     console.log(firstCard, secondCard);
                     fcli = null, scli = null;
+                    incrementMoves();
                 }
             }
         });
