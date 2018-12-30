@@ -58,10 +58,18 @@ function cardClick(){
             } else if (fcli !== null && scli === null){
                 secondCard = $(this)[0].children[0].className;
                 scli = $(this);
+                if (firstCard === secondCard){
+                    $(fcli).addClass('match');
+                    $(scli).addClass('match');
+                    console.log('Its match!');
+                } else {
+                    console.log('Its dont match');
+                }
+                console.log(firstCard, secondCard);
+                fcli = null, scli = null;
             }
-            console.log(firstCard, secondCard);
         });
-    })
+    });
 }
 
 cardClick();
