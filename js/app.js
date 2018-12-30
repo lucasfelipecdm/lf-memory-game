@@ -55,30 +55,31 @@ function backUnMatchedCards(){
 function cardClick(){
     $('.card').each(function (){
         $(this).on('click', function (){
-            showSymbol(this);
-            /*if ($(this).hasClass('open show')){
-                return true;
-            }*/
-            if (fcli === null){
-                firstCard = $(this)[0].children[0].className;
-                fcli = $(this);
-            } else if (fcli !== null && scli === null){
-                secondCard = $(this)[0].children[0].className;
-                scli = $(this);
-                if (firstCard === secondCard){
-                    $(fcli).addClass('match');
-                    $(scli).addClass('match');
-                    console.log('Its match!');
-                } else {                    
-                    $(fcli).addClass('unMatch');
-                    $(scli).addClass('unMatch');
-                    console.log('Its dont match');                    
-                    setTimeout( function() {
-                        backUnMatchedCards();
-                    }, 1000);                    
+            if ($(this).hasClass('open show')){
+                console.log('this was clicked man!!');
+            } else {
+                showSymbol(this);
+                if (fcli === null){
+                    firstCard = $(this)[0].children[0].className;
+                    fcli = $(this);
+                } else if (fcli !== null && scli === null){
+                    secondCard = $(this)[0].children[0].className;
+                    scli = $(this);
+                    if (firstCard === secondCard){
+                        $(fcli).addClass('match');
+                        $(scli).addClass('match');
+                        console.log('Its match!');
+                    } else {                    
+                        $(fcli).addClass('unMatch');
+                        $(scli).addClass('unMatch');
+                        console.log('Its dont match');                    
+                        setTimeout( function() {
+                            backUnMatchedCards();
+                        }, 1000);                    
+                    }
+                    console.log(firstCard, secondCard);
+                    fcli = null, scli = null;
                 }
-                console.log(firstCard, secondCard);
-                fcli = null, scli = null;
             }
         });
     });
