@@ -41,6 +41,20 @@ function createGrid(){
 
 createGrid();
 
+function showSymbol(card){
+    $(card).addClass('open');
+    $(card).addClass('show');
+}
+
+function cardClick(){
+    $('.card').each(function (){
+        $(this).on('click', function (){
+            showSymbol(this);
+        });
+    })
+}
+
+cardClick();
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
