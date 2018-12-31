@@ -109,6 +109,10 @@ h1 {
     display: inline-block;
 }
 
+.hide {
+    display: none;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;
@@ -124,6 +128,18 @@ h1 {
     left: calc(50% - 125px);
     display: none;
     text-align: center;
+}
+
+.modal .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.modal .stars li {
+    list-style: none;
+    display: inline-block;
 }
 
 .showed {

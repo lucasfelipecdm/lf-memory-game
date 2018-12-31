@@ -16,11 +16,10 @@ const cardsArray = [
     'fa-bomb',
     'fa-bomb'
 ];
-
+const allStars = $('.fa-star')
 let moves = 0;
 let matchedCards = 0;
 let timeStarted = false;
-
 let firstCard = null, secondCard = null, fcli = null, scli = null;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -55,10 +54,23 @@ function timer() {
     }, 1000);
 }
 
+function starRate() {
+    if (moves === 16){
+        $(allStars[0]).addClass('hide');
+        $(allStars[3]).addClass('hide');
+    } else if (moves === 20){        
+        $(allStars[1]).addClass('hide');
+        $(allStars[4]).addClass('hide');
+    }
+}
+
 function incrementMoves() {
     moves += 1;
     $('.moves').text(moves);
     $('.endMoves').text(moves);
+    if (0 < moves <= 20){
+        starRate();
+    }
 }
 
 function createGrid(){
