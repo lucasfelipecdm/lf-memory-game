@@ -16,11 +16,17 @@ const cardsArray = [
     'fa-bomb',
     'fa-bomb'
 ];
-const allStars = $('.fa-star')
+// star icon variable
+const allStars = $('.fa-star');
+let lockBoard = false;
+let [firstClick, secondClick] = [null, null];
+let [fcli, scli] = [null, null];
+let endScore = 0;
+//move(s) variables
 let moves = 0;
-let matchedCards = 0;
-let timeStarted = false;
-let firstCard = null, secondCard = null, fcli = null, scli = null;
+let itMatches = 0;
+// Time variables
+let startGame = 0;
 let gameInterval;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
