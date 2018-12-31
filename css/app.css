@@ -113,3 +113,19 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+    width: 250px;
+    height: 250px;
+    background-color: blue;
+    color: white;
+    position: absolute;
+    top: calc(50% - 125px);
+    left: calc(50% - 125px);
+    display: none;
+    text-align: center;
+}
+
+.showed {
+    display: block;
+}

@@ -18,6 +18,7 @@ const cardsArray = [
 ];
 
 let moves = 0;
+let matchedCards = 0;
 
 let firstCard = null, secondCard = null, fcli = null, scli = null;
 
@@ -76,6 +77,10 @@ function cardClick(){
                         $(fcli).addClass('match');
                         $(scli).addClass('match');
                         console.log('Its match!');
+                        matchedCards += 1;
+                        if (matchedCards === 8){
+                            $('.modal').addClass('showed');
+                        }
                     } else {                    
                         $(fcli).addClass('unMatch');
                         $(scli).addClass('unMatch');
