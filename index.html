@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Matching Game</title>
+    <title>LF Memory Game</title>
     <meta name="description" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -11,43 +11,58 @@
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
-
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
-
-            <span class="moves">0</span> Moves
-            
-            <span class="time">00:00</span>
-
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+<div class="container">
+    <header>
+        <img class="img-logo" src="img/logo-white.png" alt="LF logo">
+        <h1>Memory Game</h1>
+    </header>
+    <!--Init of score-panel-->
+    <section class="score-panel">
+        <ul class="star-rating">
+            <li><i class="fa fa-star" title="Star Rating"></i></li>
+            <li><i class="fa fa-star" title="Star Rating"></i></li>
+            <li><i class="fa fa-star" title="Star Rating"></i></li>
+        </ul>
+        <div class="current-rate">
+            <div class="counter"></div>
+            <span>Move(s) </span><span class="moves">0</span>
+        </div>
+        <div class="counter">
+            <span class="displayTime">00:00</span>
+            <span>Time <i class="fa fa-hourglass-half" title="Time"></i></span>
+        </div>
+        <button class="btn restart">
+            <span>Reload</span>
+            <i class="fa fa-repeat"></i>
+        </button>
+    </section>
+    <!--End of score-panel-->
+    <!--Init of the list of cards-->
+    <ul class="deck" id="card-deck">
+    <!--This list will be filled dynamically-->   
+    </ul>
+    <!--End of the list of cards-->
+    <!--Init of modal div-->
+    <div class="block-screen hide">
+        <section class="modal">
+            <div class="result">
+                <h2><span class="pop-up-header">Congratulations!</span></h2>
+                <p>You needed <span id="end-moves">0</span> moves to finish the game</p>
+                <p>Your time is <span id="end-time">00.00</span>.</p>
+                <p class="end-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </p>
+                <p>Score: <span id="end-score"></span></p>
+                <p>Play again?</p>
+                <button class="btn btn-yes">Yeap!</button>
+                <button class="btn btn-no">Nah</button>
+            </div>
         </section>
-
-        <ul class="deck">
-            <!--This list will be filled dynamically-->
-        </ul>
     </div>
-    <div class="modal">
-        <p>Congratulations you won!</p>
-        <p>Your time was:<span class="endTime"> 00:00 </span></p>
-        <p>You needed <span class="endMoves"> 0 </span> moves</p>
-        <p>You rate was</p>
-        <ul class="stars">
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-            <li><i class="fa fa-star"></i></li>
-        </ul>
-    </div>
-
-    <script src="js/app.js"></script>
+    <!--End of modal div-->
+</div>
+<script src="js/app.js"></script>
 </body>
 </html>
