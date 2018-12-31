@@ -1,167 +1,205 @@
-const cardsArray = [
-    'fa-diamond',
-    'fa-diamond',
-    'fa-paper-plane-o',
-    'fa-paper-plane-o',
-    'fa-anchor',
-    'fa-anchor',
-    'fa-bolt',
-    'fa-bolt',
-    'fa-cube',
-    'fa-cube',
-    'fa-leaf',
-    'fa-leaf',
-    'fa-bicycle',
-    'fa-bicycle',
-    'fa-bomb',
-    'fa-bomb'
+
+ const cardsArray = [
+    'fa-money',
+    'fa-money',
+    'fa-laptop',
+    'fa-laptop',
+    'fa-heart',
+    'fa-heart',
+    'fa-bug',
+    'fa-bug',
+    'fa-coffee',
+    'fa-coffee',
+    'fa-code',
+    'fa-code',
+    'fa-keyboard-o',
+    'fa-keyboard-o',
+    'fa-headphones',
+    'fa-headphones'
 ];
-// star icon variable
-const allStars = $('.fa-star');
-let lockBoard = false;
-let [firstClick, secondClick] = [null, null];
-let [fcli, scli] = [null, null];
-let endScore = 0;
-//move(s) variables
-let moves = 0;
-let itMatches = 0;
-// Time variables
-let startGame = 0;
-let gameInterval;
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-function timer() {
-    let minutes = 0;
-    let seconds = 0;
-    gameInterval = setInterval(function () {
-        seconds = parseInt(seconds, 10) + 1;
-        minutes = parseInt(minutes, 10);
-        if (seconds >= 60) {
-            minutes += 1;
-            seconds = 0;
-        }
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        $('.time').text(minutes + ":" + seconds);
-        $('.endTime').text($('.time').text());
-    }, 1000);
-}
-
-function starRate() {
-    if (moves === 16){
-        $(allStars[0]).addClass('hide');
-        $(allStars[3]).addClass('hide');
-    } else if (moves === 20){        
-        $(allStars[1]).addClass('hide');
-        $(allStars[4]).addClass('hide');
-    }
-}
-
-function restartStarRate() {
-    $('.fa-star').removeClass().addClass('fa fa-star');
-}
-
-function incrementMoves() {
-    moves += 1;
-    $('.moves').text(moves);
-    $('.endMoves').text(moves);
-    if (0 < moves <= 20){
-        starRate();
-    }
-}
-
-function createGrid(){
-    $('.deck').html('');
-    shuffleArray = shuffle(cardsArray)
-    $(shuffleArray).each(function (){
-        $('.deck').append('<li class ="card"><i class="fa ' + this + '"></i></li>')
-    })
-}
-
-function showSymbol(card){
-    $(card).addClass('open');
-    $(card).addClass('show');
-}
-
-function backUnMatchedCards(){  
-    $('.unMatch').removeClass('open show unMatch');
-}
-
-function cardClick(){
-    $('.card').each(function (){
-        $(this).on('click', function (){
-            if (!timeStarted){
-                timer();
-                timeStarted = true;
-            }
-            if ($(this).hasClass('open show')){
-                console.log('this was clicked man!!');
-            } else {
-                showSymbol(this);
-                if (fcli === null){
-                    firstCard = $(this)[0].children[0].className;
-                    fcli = $(this);
-                } else if (fcli !== null && scli === null){
-                    secondCard = $(this)[0].children[0].className;
-                    scli = $(this);
-                    if (firstCard === secondCard){
-                        $(fcli).addClass('match');
-                        $(scli).addClass('match');
-                        console.log('Its match!');
-                        matchedCards += 1;
-                        if (matchedCards === 8){
-                            clearInterval(gameInterval);                           
-                            $('.modal').addClass('showed');
-                        }
-                    } else {                    
-                        $(fcli).addClass('unMatch');
-                        $(scli).addClass('unMatch');
-                        console.log('Its dont match');                    
-                        setTimeout( function() {
-                            backUnMatchedCards();
-                        }, 1000);                    
-                    }
-                    console.log(firstCard, secondCard);
-                    fcli = null, scli = null;
-                    incrementMoves();
-                }
-            }
-        });
-    });
-}
-
-
-
-function initGame(){    
-    createGrid();
-    cardClick();
-    moves = 0;
-    $('.time').text('00:00');
-    $('.moves').text('0');    
-    clearInterval(gameInterval);  
-    matchedCards = 0;
-    timeStarted = false;
-    firstCard = null, secondCard = null, fcli = null, scli = null;
-    $('.modal').removeClass('showed');
-    restartStarRate();
-}
-
-initGame();
-
-$('.restart').on('click', function(){
-        initGame();
-})
+ let lockBoard = false;
+ let [firstClick, secondClick] = [null, null];
+ let [fcli, scli] = [null, null];
+ let endScore = 0;
+ let moves = 0;
+ let itMatches = 0;
+ const allStars = $('.fa-star');
+ let startGame = 0;
+ let gameInterval;
+  
+ function shuffle(array) {
+     let currentIndex = array.length,
+         temporaryValue, randomIndex;
+ 
+     while (currentIndex !== 0) {
+         randomIndex = Math.floor(Math.random() * currentIndex);
+         currentIndex -= 1;
+         temporaryValue = array[currentIndex];
+         array[currentIndex] = array[randomIndex];
+         array[randomIndex] = temporaryValue;
+     }
+ 
+     return array;
+ }
+ 
+ 
+ function timer() {
+     let minutes = 0;
+     let seconds = 0;
+     gameInterval = setInterval(function () {
+         seconds = parseInt(seconds, 10) + 1;
+         minutes = parseInt(minutes, 10);
+         if (seconds >= 60) {
+             minutes += 1;
+             seconds = 0;
+         }
+         seconds = seconds < 10 ? "0" + seconds : seconds;
+         minutes = minutes < 10 ? "0" + minutes : minutes;
+         $('.displayTime').html(minutes + ":" + seconds);
+         $('#end-time').text($('.displayTime').text());
+     }, 1000);
+ }
+ 
+ 
+ function displaySymbol(cardOpen) {
+     $(cardOpen).addClass("open show");
+ }
+ 
+ 
+ function closeUnmatchedCards() {
+     setTimeout(function () {
+         $('.unMatch').removeClass('unMatch show open');
+     }, 100);
+ }
+ 
+ 
+ function restartClick() {
+     [firstClick, secondClick] = [null, null]
+ }
+ 
+ 
+ function setStarsNum() {
+     if (moves === 16) {
+         $(allStars[0]).addClass('hide');
+         $(allStars[3]).addClass('hide');
+     } else if (moves === 20) {
+         $(allStars[1]).addClass('hide');
+         $(allStars[4]).addClass('hide');
+     }
+ }
+ 
+ 
+ function moveCounter() {
+     moves++;
+     $('.moves').html(moves);
+     $('#end-moves').html(moves);
+     if (0 < moves <= 20) {
+         setStarsNum();
+     }
+ }
+ 
+ 
+ function cleanStatus() {
+     for (let i = 0; i < allStars.length; i++) {
+         $(allStars[i]).removeClass('hide');
+     }
+     endScore = 0;
+     itMatches = 0;
+     startGame = 0;
+     moves = 0;
+     $('.moves').text(0);
+     [fcli, scli] = [null, null];
+     $('.block-screen').removeClass('showed').addClass('hide');
+ }
+ 
+ 
+ function newCard(cardIcon) {
+     return '<li class ="card"><i class="fa ' + cardIcon + '"></i></li>'
+ };
+ 
+ 
+ function matchCard() {
+     $(fcli).addClass('match true');
+     $(scli).addClass('match true');
+     endScore += 10;
+     itMatches++;
+     if (itMatches === 8) {
+         clearInterval(gameInterval);
+         $('#end-score').text(endScore.toString());
+         $('.block-screen').removeClass('hide').addClass('showed');
+     }
+     lockBoard = false;
+ }
+ 
+ 
+ function unMatchCard() {
+     $(fcli).addClass('unMatch');
+     $(scli).addClass('unMatch');
+     endScore -= 2;
+     setTimeout(function () {
+         closeUnmatchedCards();
+     }, 750);
+     lockBoard = false;
+ }
+ 
+ 
+ function cardClick(card) {
+     $(card).on('click', function () {
+         if (startGame === 0) {
+             timer();
+             startGame++;
+         }
+ 
+         if (lockBoard || $(this).hasClass('open show')) {
+             return true;
+         }
+ 
+         if (firstClick === null && secondClick === null) {
+             firstClick = $(this)[0].children[0].className;
+             fcli = $(this);
+         } else if (firstClick !== null && secondClick === null) {
+             lockBoard = true;
+             secondClick = $(this)[0].children[0].className;
+             scli = $(this);
+             if (firstClick === secondClick) {
+                 matchCard();
+             } else {
+                 unMatchCard();
+             }
+             moveCounter();
+             restartClick();
+         }
+         displaySymbol(this);
+     })
+ }
+ 
+ 
+ function gameStart() {
+     cleanStatus();
+     restartClick();
+     clearInterval(gameInterval);
+     $('.displayTime').html('00:00');
+     $('.deck').html('');
+     $(shuffle(cardsArray)).each(function () {
+         $('.deck').append(newCard(this));
+     })
+     $('.card').each(function () {
+         cardClick(this);
+     })
+ }
+ gameStart();
+ 
+ 
+ $('.restart').on('click', function () {
+     gameStart();
+ });
+ 
+ 
+ $('.btn-yes').on('click', function () {
+     gameStart();
+ });
+ 
+ 
+ $('.btn-no').on('click', function () {
+     $('.block-screen').removeClass('showed').addClass('hide');
+ });
