@@ -21,6 +21,7 @@ let moves = 0;
 let matchedCards = 0;
 let timeStarted = false;
 let firstCard = null, secondCard = null, fcli = null, scli = null;
+let gameInterval;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -64,6 +65,10 @@ function starRate() {
     }
 }
 
+function restartStarRate() {
+    $('.fa-star').removeClass().addClass('fa fa-star');
+}
+
 function incrementMoves() {
     moves += 1;
     $('.moves').text(moves);
@@ -74,13 +79,12 @@ function incrementMoves() {
 }
 
 function createGrid(){
+    $('.deck').html('');
     shuffleArray = shuffle(cardsArray)
     $(shuffleArray).each(function (){
         $('.deck').append('<li class ="card"><i class="fa ' + this + '"></i></li>')
     })
 }
-
-createGrid();
 
 function showSymbol(card){
     $(card).addClass('open');
@@ -134,4 +138,24 @@ function cardClick(){
     });
 }
 
-cardClick();
+
+
+function initGame(){    
+    createGrid();
+    cardClick();
+    moves = 0;
+    $('.time').text('00:00');
+    $('.moves').text('0');    
+    clearInterval(gameInterval);  
+    matchedCards = 0;
+    timeStarted = false;
+    firstCard = null, secondCard = null, fcli = null, scli = null;
+    $('.modal').removeClass('showed');
+    restartStarRate();
+}
+
+initGame();
+
+$('.restart').on('click', function(){
+        initGame();
+})
