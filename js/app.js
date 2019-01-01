@@ -1,4 +1,3 @@
-
  const cardsArray = [
     'fa-money',
     'fa-money',
