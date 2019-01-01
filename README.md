@@ -1,20 +1,18 @@
-# Memory Game Project
+# LF Memory Game Project
 
-## Table of Contents
+## Description
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+This game is last project of front-end web developer nanodegree.
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+To play this memory game, you just need download this repo, extract the .zip file, and open the index.html in any browser you have installed.
 
-To get started, open `js/app.js` and start building out the app's functionality
+Para jogar você precisa apenas afetuar o download desse repositório, extrair o arquivo .zip e clicar sobre o arquivo index.html.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## How the game works
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* Click on any card to display the symbol
+* Try to click another card with the same symbol of previous card
+* If the symbol match, this cards will display another color and your score gonna increase
+* When you match all 8 pairs of cards the game end. 
