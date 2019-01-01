@@ -8,7 +8,7 @@ This game is last project of front-end web developer nanodegree.
 
 To play this memory game, you just need download this repo, extract the .zip file, and open the index.html in any browser you have installed.
 
-Para jogar você precisa apenas afetuar o download desse repositório, extrair o arquivo .zip e clicar sobre o arquivo index.html.
+Or, you just need to click [here](https://lucasfelipecdm.github.io/lf-memory-game/) and play the live game.
 
 ## How the game works
 
