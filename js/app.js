@@ -30,6 +30,7 @@
  let [firstClick, secondClick] = [null, null];
  let [fcli, scli] = [null, null];
  let endScore = 0;
+ let tabIndex = 0;
  //move(s) variables
  let moves = 0;
  let itMatches = 0;
@@ -141,7 +142,8 @@
  /*[en] - Creates the element "li",  add class "card", creates the element "i" within "li", add class "fa" + "cardIcon" and return it
   [ptbr] - Cria o elemento "li" adiciona a class "card", cria o elemento dentro de li e adiciona a class "fa" + "cardIcon" e o retorna*/
  function newCard(cardIcon) {
-     return '<li class ="card"><i class="fa ' + cardIcon + '"></i></li>'
+     tabIndex += 1;
+     return '<li class ="card" tabindex="'+tabIndex+'"><i class="fa ' + cardIcon + '"></i></li>'
  };
  
  /*[en] - Adds "match" and "true" class to corresponding cards, increments endScore and checks that all cards have been combined
@@ -201,6 +203,25 @@
          }
          displaySymbol(this);
      })
+/*[en] - Creates a keyboard event listener, the card focus can be controled by keyboard arrows and clicked by the enter.
+[ptbr] - Cria um observador de evento para o teclado, o foco da carta pode ser controlado pelas setas do teclado e ela pode ser clicada através da tecla enter */
+     $(card).keydown( function(evt){
+         evt.preventDefault();
+         console.log(evt.keyCode);
+         if (evt.keyCode == 13) {            
+            $(card).click();
+         } else if (evt.keyCode == 37) {
+            $('.card:focus').prev().focus();
+            console.log('next card focus');
+         } else if (evt.keyCode == 39) {
+            $('.card:focus').next().focus();
+            console.log('previous card focus');
+         } else if (evt.keyCode == 38) {             
+            $('.card:focus').prev().prev().prev().prev().focus();
+         } else if (evt.keyCode == 40) {             
+            $('.card:focus').next().next().next().next().focus();
+         }
+    })
  }
  
  /*[en] - Init the game, clean all status and set all variable values to default, create the "li" element with the function newCard and append it to HTML document then call the cardClick to create the event listeners on cards
@@ -217,6 +238,7 @@
      $('.card').each(function () {
          cardClick(this);
      })
+     $('.card:first').focus();
  }
  gameStart();
  
