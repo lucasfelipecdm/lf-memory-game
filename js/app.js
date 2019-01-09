@@ -157,6 +157,7 @@
          clearInterval(gameInterval);
          $('#end-score').text(endScore.toString());
          $('.block-screen').removeClass('hide').addClass('showed');
+         $('.btn-yes').focus();
      }
      lockBoard = false;
  }
@@ -207,15 +208,12 @@
 [ptbr] - Cria um observador de evento para o teclado, o foco da carta pode ser controlado pelas setas do teclado e ela pode ser clicada através da tecla enter */
      $(card).keydown( function(evt){
          evt.preventDefault();
-         console.log(evt.keyCode);
          if (evt.keyCode == 13) {            
             $(card).click();
          } else if (evt.keyCode == 37) {
             $('.card:focus').prev().focus();
-            console.log('next card focus');
          } else if (evt.keyCode == 39) {
             $('.card:focus').next().focus();
-            console.log('previous card focus');
          } else if (evt.keyCode == 38) {             
             $('.card:focus').prev().prev().prev().prev().focus();
          } else if (evt.keyCode == 40) {             
@@ -242,20 +240,44 @@
  }
  gameStart();
  
- /*[en] - Creates an event listeners to call gameStart when the element is clicked
-  [ptbr] - Cria um observador de eventos para chamar a função gameStart quando o elemento é clicado*/
+ /*[en] - Creates an event listeners to call gameStart when the element is clicked or enter be pressed
+  [ptbr] - Cria um observador de eventos para chamar a função gameStart quando o elemento é clicado ou é pressionada a tecla enter*/
  $('.restart').on('click', function () {
      gameStart();
  });
  
- /*[en] - Creates an event listeners to call gameStart when the element is clicked
-  [ptbr] - Cria um observador de eventos para chamar a função gameStart quando o elemento é clicado*/
+ $(document).keydown(function (evt){
+    if (evt.keyCode == 113) {
+        $('.restart').click();
+    }
+ })
+ 
+ /*[en] - Creates an event listeners to call gameStart when the element is clicked or enter be pressed
+  [ptbr] - Cria um observador de eventos para chamar a função gameStart quando o elemento é clicado ou é pressionada a tecla enter*/
  $('.btn-yes').on('click', function () {
      gameStart();
  });
+
+ $('.btn-yes').keydown(function (evt){
+     if (evt.keyCode == 13){
+        $('.btn-yes').click();
+    } else if (evt.keyCode == 39) {
+        $('.btn-no').focus();
+    }
+})
  
- /*[en] - Creates an event listeners to hidden the modal when clicked
-  [ptbr] - Cria um observador de eventos para esconder o modal quando o elemento é clicado*/
+ /*[en] - Creates an event listeners to hidden the modal when clicked or enter be pressed
+  [ptbr] - Cria um observador de eventos para esconder o modal quando o elemento é clicado ou é pressionada a tecla enter*/
  $('.btn-no').on('click', function () {
      $('.block-screen').removeClass('showed').addClass('hide');
  });
+
+ $('.btn-no').keydown(function (evt){
+    if (evt.keyCode == 13){
+        $('.btn-no').click();
+    } else if (evt.keyCode == 37) {
+        $('.btn-yes').focus();
+    } 
+})
+
+

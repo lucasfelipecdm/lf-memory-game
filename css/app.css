@@ -47,6 +47,10 @@ h1 {
     text-shadow: -2px -2px 5px rgba(0,0,0,0.75);
 }
 
+.f2-reload {
+    font-size: 8px;
+}
+
 .deck {
     width: 680px;
     min-height: 680px;
